@@ -14,7 +14,6 @@ public class ConfProperties {
                 .getResourceAsStream(propertyFileName)) {
 
             if (input == null) {
-//                throw new RuntimeException(propertyFileName + " not found in classpath");
                 System.out.println("Properties file " + propertyFileName + " not found. Using environment variables.");
             }
             else
