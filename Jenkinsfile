@@ -20,16 +20,6 @@ pipeline {
                 sh 'mvn -B -DskipTests clean install'
             }
         }
-//         stage('Checkstyle') {
-//             steps {
-//                 sh 'mvn checkstyle:checkstyle'
-//             }
-//             post {
-//                 always {
-//                     recordIssues tools: [checkStyle(pattern: 'target/checkstyle-result.xml')]
-//                 }
-//             }
-//         }
         stage('Test') {
             environment {
                 DB_NAME = 'basketball'
@@ -45,6 +35,8 @@ pipeline {
                         passwordVariable: 'DB_PASSWORD'
                     )
                 ]) {
+                    sh 'nc -zv localhost 5432 || true'
+                    sh 'curl -v http://localhost:5030 || true'
                     echo "Run ${params.testsType} tests"
                     sh "mvn -pl ${params.testsType}-tests -am test -Dgroups=${params.testsType}"
                 }
