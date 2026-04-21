@@ -1,9 +1,19 @@
 pipeline {
     agent any
+
     tools {
         jdk 'jdk21'
         maven 'maven'
     }
+
+    parameters {
+        choice(name: 'testsType', choices: ['api', 'web'], description: 'Choose tests type to run')
+    }
+
+    triggers {
+        cron('H 15 * * *')
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -22,7 +32,7 @@ pipeline {
 //         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn test -Dgroups={params.testsType}'
             }
             post {
                 always {
