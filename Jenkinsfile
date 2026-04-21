@@ -25,7 +25,7 @@ pipeline {
                 DB_NAME = 'basketball'
                 DB_PORT = '5432'
                 DB_HOST = 'localhost'
-                BASE_API_URL = 'http://localhost:5030'
+                API_BASE_URL = 'http://localhost:5030'
             }
             steps {
                 withCredentials([
