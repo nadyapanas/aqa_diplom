@@ -3,6 +3,7 @@ import org.testng.annotations.Test;
 import page_object.page.main.MainPage;
 import page_object.page.sign_up.AccountsActivatePage;
 import page_object.page.sign_up.SignUpPage;
+import com.github.javafaker.Faker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,18 +13,15 @@ public class SignUpTest extends BaseTest{
         MainPage mainPage = new MainPage(driver, wait);
         SignUpPage signUpPage = new SignUpPage(driver, wait);
         AccountsActivatePage accountsActivatePage = new AccountsActivatePage(driver, wait);
-        final String firstName = "Nadya";
-        final String lastName = "Test";
-        final String email = "nadya.testing@gmail.com";
-        final String password = "fudhy4Hn231";
+        Faker faker = new Faker();
         mainPage.open()
                 .waitForLoad()
                 .clickSignUpButton();
         signUpPage.waitForLoad()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterEmail(email)
-                .enterPassword(password)
+                .enterFirstName(faker.name().firstName())
+                .enterLastName(faker.name().lastName())
+                .enterEmail(faker.internet().safeEmailAddress())
+                .enterPassword(faker.internet().password(8, 14, true, true, true))
                 .clickCreateMyAccountButton();
         accountsActivatePage.waitForLoad();
         assertThat(accountsActivatePage.isLoaded())
