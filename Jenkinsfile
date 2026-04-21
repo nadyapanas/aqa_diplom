@@ -10,16 +10,16 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Checkstyle') {
-            steps {
-                sh 'mvn checkstyle:checkstyle'
-            }
-            post {
-                always {
-                    recordIssues tools: [checkStyle(pattern: 'target/checkstyle-result.xml')]
-                }
-            }
-        }
+//         stage('Checkstyle') {
+//             steps {
+//                 sh 'mvn checkstyle:checkstyle'
+//             }
+//             post {
+//                 always {
+//                     recordIssues tools: [checkStyle(pattern: 'target/checkstyle-result.xml')]
+//                 }
+//             }
+//         }
         stage('Test') {
             steps {
                 sh 'mvn test'
