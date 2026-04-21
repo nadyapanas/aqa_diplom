@@ -15,7 +15,7 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver, wait);
         ProfilePage profile = new ProfilePage(driver,wait);
         final String emailAddress = "panas.nadysha@gmail.com";
-        final String password = "fudhy4Hn";
+        final String password = "testPassword1";
         mainPage.open()
                 .waitForLoad()
                 .clickLoginButton();
