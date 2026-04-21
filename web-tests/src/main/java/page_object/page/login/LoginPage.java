@@ -16,6 +16,7 @@ public class LoginPage extends BasePage {
     private static final By PASSWORD_FIELD = By.id("password");
     private static final By CONTINUE_BUTTON = By.xpath("//*[@name='action']");
     private static final By ERROR_EMPTY_EMAIL_ADDRESS_FIELD = By.id("error-cs-username-required");
+    private static final By ERROR_EMPTY_PASSWORD_FIELD = By.id("error-cs-password-required");
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -44,6 +45,15 @@ public class LoginPage extends BasePage {
     public String getErrorEmailText() {
         try {
             WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_EMPTY_EMAIL_ADDRESS_FIELD));
+            assert errorElement != null;
+            return errorElement.getText().trim();
+        } catch (TimeoutException e) {
+            return "";
+        }
+    }
+    public String getErrorPasswordText() {
+        try {
+            WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_EMPTY_PASSWORD_FIELD));
             assert errorElement != null;
             return errorElement.getText().trim();
         } catch (TimeoutException e) {

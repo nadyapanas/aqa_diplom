@@ -58,7 +58,7 @@ public class LoginTest extends BaseTest {
                 .clickLoginButton();
         loginPage.waitForLoad()
                 .clickContinueButton();
-        String errorText = loginPage.getErrorEmailText();
+        String errorText = loginPage.getErrorPasswordText();
         assertThat(errorText)
                 .as("Некорректный текст ошибки для поля Password address")
                 .contains("Password is required");
