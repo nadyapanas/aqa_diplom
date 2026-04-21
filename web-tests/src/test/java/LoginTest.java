@@ -6,8 +6,9 @@ import page_object.page.profile.ProfilePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Test(groups = "web")
 public class LoginTest extends BaseTest {
-    @Test
+
     public void shouldLoginWithValidCredentials() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
@@ -29,7 +30,6 @@ public class LoginTest extends BaseTest {
                 .isTrue();
     }
 
-    @Test
     public void testEmptyEmailError(){
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
@@ -46,7 +46,7 @@ public class LoginTest extends BaseTest {
                 .as("Некорректный текст ошибки для поля Email address")
                 .contains("Please enter an email address");
     }
-    @Test
+
     public void testEmptyPasswordError(){
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);

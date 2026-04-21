@@ -7,8 +7,9 @@ import com.github.javafaker.Faker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Test(groups = "web")
 public class SignUpTest extends BaseTest{
-    @Test
+
     public void shouldSignUpWithValidCredentials(){
         MainPage mainPage = new MainPage(driver, wait);
         SignUpPage signUpPage = new SignUpPage(driver, wait);

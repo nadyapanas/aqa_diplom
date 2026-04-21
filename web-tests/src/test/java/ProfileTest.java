@@ -6,8 +6,9 @@ import page_object.page.profile.ProfilePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Test(groups = "web")
 public class ProfileTest extends BaseTest{
-    @Test
+
     public void checkCreateNewAccountButton() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
@@ -30,7 +31,6 @@ public class ProfileTest extends BaseTest{
                 .isTrue();
     }
 
-    @Test
     public void checkEmailAddressInSecurity() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
