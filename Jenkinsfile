@@ -32,7 +32,8 @@ pipeline {
 //         }
         stage('Test') {
             steps {
-                sh 'mvn test -Dgroups={params.testsType}'
+                echo 'Run ${params.testsType} tests'
+                sh 'mvn test -pl {params.testsType}-tests -Dgroups={params.testsType} -am'
             }
             post {
                 always {
