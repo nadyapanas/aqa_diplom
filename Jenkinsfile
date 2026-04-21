@@ -46,7 +46,7 @@ pipeline {
                     )
                 ]) {
                     echo "Run ${params.testsType} tests"
-                    sh "mvn test -Dgroups=${params.testsType}"
+                    sh "mvn -pl ${params.testsType}-tests -am test -Dgroups=${params.testsType}"
                 }
             }
             post {
