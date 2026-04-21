@@ -16,7 +16,7 @@ public class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    @BeforeMethod
+    @BeforeMethod(groups = "web")
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -36,7 +36,7 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(groups = "web", alwaysRun = true)
     public void tearDown() {
         if (Objects.nonNull(driver)) {
             driver.close();
