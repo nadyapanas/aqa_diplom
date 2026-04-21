@@ -14,10 +14,11 @@ public class ConfProperties {
                 .getResourceAsStream(propertyFileName)) {
 
             if (input == null) {
-                throw new RuntimeException(propertyFileName + " not found in classpath");
+//                throw new RuntimeException(propertyFileName + " not found in classpath");
+                System.out.println("Properties file " + propertyFileName + " not found. Using environment variables.");
             }
-
-            PROPERTIES.load(input);
+            else
+                PROPERTIES.load(input);
 
         } catch (IOException e) {
             throw new RuntimeException("Failed to load properties", e);

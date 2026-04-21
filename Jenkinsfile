@@ -35,8 +35,8 @@ pipeline {
                         passwordVariable: 'DB_PASSWORD'
                     )
                 ]) {
-                    sh 'nc -zv localhost 5432 || true'
-                    sh 'curl -v http://localhost:5030 || true'
+//                     sh 'nc -zv localhost 5432 || true'
+//                     sh 'curl -v http://localhost:5030 || true'
                     echo "Run ${params.testsType} tests"
                     sh "mvn -pl ${params.testsType}-tests -am test -Dgroups=${params.testsType}"
                 }
