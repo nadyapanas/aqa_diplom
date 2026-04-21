@@ -31,9 +31,23 @@ pipeline {
 //             }
 //         }
         stage('Test') {
+            environment {
+                DB_NAME = 'basketball'
+                DB_PORT = '5432'
+                DB_HOST = 'localhost'
+                BASE_API_URL = 'http://localhost:5030'
+            }
             steps {
-                echo "Run ${params.testsType} tests"
-                sh "mvn test -pl ${params.testsType}-tests -Dgroups=${params.testsType} -am"
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'jenkins-db-creds',
+                        usernameVariable: 'DB_USER',
+                        passwordVariable: 'DB_PASSWORD'
+                    )
+                ]) {
+                    echo "Run ${params.testsType} tests"
+                    sh "mvn test -Dgroups=${params.testsType}"
+                }
             }
             post {
                 always {

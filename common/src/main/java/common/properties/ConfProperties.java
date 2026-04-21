@@ -24,16 +24,32 @@ public class ConfProperties {
         }
     }
 
+    protected static String getFromEnv(String key) {
+        String envKey = key
+                .toUpperCase()
+                .replace('.', '_');
+        return System.getenv(envKey);
+    }
 
     protected static String getRequired(String key) {
-        String value = PROPERTIES.getProperty(key);
-        if (value == null || value.isBlank()) {
-            throw new IllegalStateException("Missing required property: " + key);
+        String envValue = getFromEnv(key);
+
+        if (envValue == null || envValue.isBlank()) {
+            String propertyValue = PROPERTIES.getProperty(key);
+            if (propertyValue == null || propertyValue.isBlank()) {
+                throw new IllegalStateException("Missing required property: " + key);
+            }
+            return propertyValue;
         }
-        return value;
+        return envValue;
     }
 
     protected static String getOptional(String key, String defaultValue) {
-        return PROPERTIES.getProperty(key, defaultValue);
+        String envValue = getFromEnv(key);
+
+        if (envValue == null || envValue.isBlank()) {
+            return PROPERTIES.getProperty(key, defaultValue);
+        }
+        return envValue;
     }
 }
