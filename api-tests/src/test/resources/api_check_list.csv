@@ -1,0 +1,5 @@
+ID,Name
+TC-001,Auth. Registration with valid credentials
+TC-002,Auth. Registration with already exist username
+TC-003,User. Check getting list users by user with ADMIN role
+TC-004,User. Check getting list users by user with USER role

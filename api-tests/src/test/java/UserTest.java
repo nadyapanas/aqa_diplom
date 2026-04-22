@@ -1,3 +1,6 @@
+import org.testng.annotations.Test;
+import io.qameta.allure.AllureId;
+import io.qameta.allure.Description;
 import api.auth.AuthAssertionSteps;
 import api.auth.AuthFaker;
 import api.auth.AuthRequest;
@@ -11,13 +14,14 @@ import api.user.UserSteps;
 import database.enums.Role;
 import database.user.UserDbService;
 import database.user.UserDbSteps;
-import org.testng.annotations.Test;
 
 import java.util.List;
 
 @Test(groups = {"api", "user"})
 public class UserTest {
 
+    @AllureId("TC-003")
+    @Description("User. Check getting list users by user with ADMIN role")
     public void testListUsersWithAdminRole() {
         AuthSteps authSteps = new AuthSteps(new AuthService());
         AuthFaker authFaker = new AuthFaker();
@@ -41,6 +45,8 @@ public class UserTest {
         userDbSteps.deleteById(adminUserId);
     }
 
+    @AllureId("TC-004")
+    @Description("User. Check getting list users by user with USER role")
     public void testListUsersWithUserRole() {
         AuthSteps authSteps = new AuthSteps(new AuthService());
         AuthFaker authFaker = new AuthFaker();

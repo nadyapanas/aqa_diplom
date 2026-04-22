@@ -1,3 +1,6 @@
+import org.testng.annotations.Test;
+import io.qameta.allure.AllureId;
+import io.qameta.allure.Description;
 import api.auth.AuthAssertionSteps;
 import api.auth.AuthErrorResponse;
 import api.auth.AuthFaker;
@@ -8,11 +11,12 @@ import api.auth.AuthRequest;
 import database.user.UserDbService;
 import database.user.UserDbSteps;
 import database.user.UserEntity;
-import org.testng.annotations.Test;
 
 @Test(groups = {"api", "auth"})
 public class AuthTest {
 
+    @AllureId("TC-001")
+    @Description("Auth. Registration with valid credentials")
     public void testSignUp() {
         AuthSteps authSteps = new AuthSteps(new AuthService());
         AuthRequest authRequest = new AuthFaker().createAuthFakeRequest();
@@ -26,6 +30,8 @@ public class AuthTest {
         userDbSteps.deleteById(userEntity.getId());
     }
 
+    @AllureId("TC-002")
+    @Description("Auth. Registration with already exist username")
     public void testSignUpWithNotUniqueUsername() {
         AuthSteps authSteps = new AuthSteps(new AuthService());
         AuthFaker faker = new AuthFaker();
