@@ -1,4 +1,6 @@
 import org.testng.annotations.Test;
+import io.qameta.allure.AllureId;
+import io.qameta.allure.Description;
 import page_object.page.main.MainPage;
 import page_object.page.login.PreLoginPage;
 import page_object.page.login.LoginPage;
@@ -9,6 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Test(groups = "web")
 public class LoginTest extends BaseTest {
 
+    @AllureId("TC-002")
+    @Description("Логин. Авторизация с валидными данными")
     public void shouldLoginWithValidCredentials() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
@@ -29,6 +33,8 @@ public class LoginTest extends BaseTest {
                 .isTrue();
     }
 
+    @AllureId("TC-003")
+    @Description("Логин. Проверка валидации обязательного поля 'Email address'")
     public void testEmptyEmailError() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
@@ -46,6 +52,8 @@ public class LoginTest extends BaseTest {
                 .contains("Please enter an email address");
     }
 
+    @AllureId("TC-004")
+    @Description("Логин. Проверка валидации обязательного поля 'Password'")
     public void testEmptyPasswordError() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
@@ -59,7 +67,7 @@ public class LoginTest extends BaseTest {
                 .clickContinueButton();
         String errorText = loginPage.getErrorPasswordText();
         assertThat(errorText)
-                .as("Некорректный текст ошибки для поля Password address")
+                .as("Некорректный текст ошибки для поля Password")
                 .contains("Password is required");
     }
 }

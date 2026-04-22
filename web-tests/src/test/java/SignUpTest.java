@@ -1,5 +1,6 @@
-import org.apache.hc.core5.http.nio.entity.AbstractCharDataConsumer;
 import org.testng.annotations.Test;
+import io.qameta.allure.AllureId;
+import io.qameta.allure.Description;
 import page_object.page.main.MainPage;
 import page_object.page.sign_up.AccountsActivatePage;
 import page_object.page.sign_up.SignUpPage;
@@ -10,6 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Test(groups = "web")
 public class SignUpTest extends BaseTest{
 
+    @AllureId("TC-001")
+    @Description("Регистрация. Регистрация с валидными данными")
     public void shouldSignUpWithValidCredentials(){
         MainPage mainPage = new MainPage(driver, wait);
         SignUpPage signUpPage = new SignUpPage(driver, wait);
