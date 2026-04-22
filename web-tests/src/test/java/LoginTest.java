@@ -2,7 +2,7 @@ import org.testng.annotations.Test;
 import page_object.page.main.MainPage;
 import page_object.page.login.PreLoginPage;
 import page_object.page.login.LoginPage;
-import page_object.page.profile.ProfilePage;
+import page_object.page.sign_up.AccountsActivatePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +13,7 @@ public class LoginTest extends BaseTest {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
         LoginPage loginPage = new LoginPage(driver, wait);
-        ProfilePage profile = new ProfilePage(driver,wait);
+        AccountsActivatePage accountsActivatePage = new AccountsActivatePage(driver, wait);
         final String emailAddress = "panas.nadysha@gmail.com";
         final String password = "testPassword1";
         mainPage.open()
@@ -25,12 +25,13 @@ public class LoginTest extends BaseTest {
                 .enterEmailAddress(emailAddress)
                 .enterPassword(password)
                 .clickContinueButton();
-        assertThat(profile.isLoaded())
-                .as("Страница профиля не открыта")
+        accountsActivatePage.waitForLoad();
+        assertThat(accountsActivatePage.isLoaded())
+                .as("Страница активации аккаунта не открыта")
                 .isTrue();
     }
 
-    public void testEmptyEmailError(){
+    public void testEmptyEmailError() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
         LoginPage loginPage = new LoginPage(driver, wait);
@@ -47,7 +48,7 @@ public class LoginTest extends BaseTest {
                 .contains("Please enter an email address");
     }
 
-    public void testEmptyPasswordError(){
+    public void testEmptyPasswordError() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
         LoginPage loginPage = new LoginPage(driver, wait);
