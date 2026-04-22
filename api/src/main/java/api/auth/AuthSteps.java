@@ -16,6 +16,11 @@ public class AuthSteps {
         return authService.signUp(authRequest);
     }
 
+    @Step("Register user 'username' = '{authRequest.username}'")
+    public AuthErrorResponse registerBadRequest(AuthRequest authRequest) {
+        return authService.signUpBadRequest(authRequest);
+    }
+
     @Step("Login user 'username' = '{authRequest.username}'")
     public AuthResponse login(AuthRequest authRequest) {
         return authService.signIn(authRequest);

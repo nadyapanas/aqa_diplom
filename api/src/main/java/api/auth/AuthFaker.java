@@ -16,6 +16,13 @@ public class AuthFaker {
                 .build();
     }
 
+    public AuthRequest createAuthFakeRequest(String name) {
+        return AuthRequest.builder()
+                .username(name)
+                .password(faker.internet().password(6, 14, true, true, true))
+                .build();
+    }
+
     public List<AuthRequest> createAuthFakeRequests(Integer count) {
         return Stream.generate(this::createAuthFakeRequest)
                 .limit(count)

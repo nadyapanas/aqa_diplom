@@ -11,12 +11,12 @@ public class UserSteps {
         this.userService = userService;
     }
 
-    @Step("Get users list")
+    @Step("Get users list by Admin")
     public List<UserResponse> getAllByAdmin(String token) {
         return userService.getUsers(token);
     }
 
-    @Step("Get users list")
+    @Step("Get users list by User")
     public String getAllByUser(String token) {
         return userService.getUsersForbidden(token).extract().asString();
     }

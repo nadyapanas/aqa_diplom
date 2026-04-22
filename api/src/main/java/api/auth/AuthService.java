@@ -9,6 +9,7 @@ public class AuthService extends ApiService {
     public static final String SIGH_IN = "/auth/sign-in";
 
     public static final String AUTH_SCHEMA_PATH = "schemas/auth/auth_token_schema.json";
+    public static final String AUTH_ERROR_SCHEMA_PATH = "schemas/auth/auth_error_schema.json";
 
     public AuthResponse signIn(AuthRequest authRequest) {
         return post(Request.builder()
@@ -30,6 +31,19 @@ public class AuthService extends ApiService {
                 .headers(getDefaultHeaders())
                 .responseClass(AuthResponse.class)
                 .schemaName(AUTH_SCHEMA_PATH)
+                .build()
+        );
+    }
+
+    public AuthErrorResponse signUpBadRequest(AuthRequest authRequest) {
+        return post(Request.builder()
+                .url(API_BASE_URL)
+                .path(SIGH_UP)
+                .body(authRequest)
+                .headers(getDefaultHeaders())
+                .responseClass(AuthErrorResponse.class)
+                .schemaName(AUTH_ERROR_SCHEMA_PATH)
+                .responseStatusCode(409)
                 .build()
         );
     }
