@@ -14,16 +14,14 @@ public class LoginTest extends BaseTest {
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
         LoginPage loginPage = new LoginPage(driver, wait);
         AccountsActivatePage accountsActivatePage = new AccountsActivatePage(driver, wait);
-        final String emailAddress = "panas.nadysha@gmail.com";
-        final String password = "testPassword1";
         mainPage.open()
                 .waitForLoad()
                 .clickLoginButton();
         preLoginPage.waitForLoad()
                 .clickLoginButton();
         loginPage.waitForLoad()
-                .enterEmailAddress(emailAddress)
-                .enterPassword(password)
+                .enterEmailAddress()
+                .enterPassword()
                 .clickContinueButton();
         accountsActivatePage.waitForLoad();
         assertThat(accountsActivatePage.isLoaded())

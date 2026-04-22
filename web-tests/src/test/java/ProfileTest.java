@@ -8,24 +8,22 @@ import page_object.page.sign_up.AccountsActivatePage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Test(groups = "web")
-public class ProfileTest extends BaseTest{
+public class ProfileTest extends BaseTest {
 
     public void checkMyProfileIsLoaded() {
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
         LoginPage loginPage = new LoginPage(driver, wait);
-        ProfilePage profile = new ProfilePage(driver, wait, "Nadya", "Panas");
-        AccountsActivatePage accountsActivatePage = new AccountsActivatePage(driver,wait);
-        final String emailAddress = "panas.nadysha@gmail.com";
-        final String password = "testPassword1";
+        ProfilePage profile = new ProfilePage(driver, wait);
+        AccountsActivatePage accountsActivatePage = new AccountsActivatePage(driver, wait);
         mainPage.open()
                 .waitForLoad()
                 .clickLoginButton();
         preLoginPage.waitForLoad()
                 .clickLoginButton();
         loginPage.waitForLoad()
-                .enterEmailAddress(emailAddress)
-                .enterPassword(password)
+                .enterEmailAddress()
+                .enterPassword()
                 .clickContinueButton();
         accountsActivatePage.waitForLoad()
                 .clickMyProfileButton();
@@ -39,24 +37,22 @@ public class ProfileTest extends BaseTest{
         MainPage mainPage = new MainPage(driver, wait);
         PreLoginPage preLoginPage = new PreLoginPage(driver, wait);
         LoginPage loginPage = new LoginPage(driver, wait);
-        ProfilePage profile = new ProfilePage(driver, wait, "Nadya", "Panas");
-        AccountsActivatePage accountsActivatePage = new AccountsActivatePage(driver,wait);
-        final String expectedEmail = "panas.nadysha@gmail.com";
-        final String password = "testPassword1";
+        ProfilePage profile = new ProfilePage(driver, wait);
+        AccountsActivatePage accountsActivatePage = new AccountsActivatePage(driver, wait);
         mainPage.open()
                 .waitForLoad()
                 .clickLoginButton();
         preLoginPage.waitForLoad()
                 .clickLoginButton();
         loginPage.waitForLoad()
-                .enterEmailAddress(expectedEmail)
-                .enterPassword(password)
+                .enterEmailAddress()
+                .enterPassword()
                 .clickContinueButton();
         accountsActivatePage.waitForLoad()
                 .clickMyProfileButton();
         profile.waitForLoad();
         assertThat(profile.findProfileFullNameField())
                 .as("Full name должен совпадать с ожидаемым")
-                .isEqualTo("Nadya Panas");
+                .isEqualTo(profile.firstName + " " + profile.secondName);
     }
 }

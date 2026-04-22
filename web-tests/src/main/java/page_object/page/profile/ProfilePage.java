@@ -3,6 +3,7 @@ package page_object.page.profile;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page_object.page.BasePage;
+import properties.WebProperties;
 
 import java.util.Objects;
 
@@ -11,13 +12,15 @@ public class ProfilePage extends BasePage {
     private static final By TITLE = By.xpath("//div[@id='page_heading_cont']//h1");
     private static final By FULL_NAME_FIELD = By.xpath("//div[@id='fullname_cont']//span");
 
-    protected final String firstName;
-    protected final String secondName;
+    public final String firstName;
+    public final String secondName;
 
-    public ProfilePage(WebDriver driver, WebDriverWait wait, String firstName, String secondName) {
+    private static final WebProperties webProperties = new WebProperties();
+
+    public ProfilePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
-        this.firstName = firstName;
-        this.secondName = secondName;
+        this.firstName = webProperties.getWebUserFirstName();
+        this.secondName = webProperties.getWebUserSecondName();
     }
 
     @Override

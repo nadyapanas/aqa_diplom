@@ -26,6 +26,8 @@ pipeline {
                 DB_PORT = '5432'
                 DB_HOST = 'localhost'
                 API_BASE_URL = 'http://localhost:5030'
+                WEB_USER_FIRST_NAME = credentials('jenkins-web-user-first-name')
+                WEB_USER_SECOND_NAME = credentials('jenkins-web-user-second-name')
             }
             steps {
                 withCredentials([
@@ -33,6 +35,11 @@ pipeline {
                         credentialsId: 'jenkins-db-creds',
                         usernameVariable: 'DB_USER',
                         passwordVariable: 'DB_PASSWORD'
+                    ),
+                    usernamePassword(
+                        credentialsId: 'jenkins-web-user-creds',
+                        usernameVariable: 'WEB_USER_EMAIL',
+                        passwordVariable: 'WEB_USER_PASSWORD'
                     )
                 ]) {
                     echo "Run ${params.testsType} tests"

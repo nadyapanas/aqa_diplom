@@ -4,10 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page_object.page.BasePage;
-
-import java.time.Duration;
-import java.util.Objects;
-
+import properties.WebProperties;
 public class LoginPage extends BasePage {
 
     public static final String TITLE_TEXT = "Welcome";
@@ -17,6 +14,8 @@ public class LoginPage extends BasePage {
     private static final By CONTINUE_BUTTON = By.xpath("//*[@name='action']");
     private static final By ERROR_EMPTY_EMAIL_ADDRESS_FIELD = By.id("error-cs-username-required");
     private static final By ERROR_EMPTY_PASSWORD_FIELD = By.id("error-cs-password-required");
+
+    private static final WebProperties webProperties = new WebProperties();
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -28,13 +27,13 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage enterEmailAddress(String emailAddress) {
-        driver.findElement(EMAIL_ADDRESS_FIELD).sendKeys(emailAddress);
+    public LoginPage enterEmailAddress() {
+        driver.findElement(EMAIL_ADDRESS_FIELD).sendKeys(webProperties.getWebUserEmail());
         return this;
     }
 
-    public LoginPage enterPassword(String password) {
-        driver.findElement(PASSWORD_FIELD).sendKeys(password);
+    public LoginPage enterPassword() {
+        driver.findElement(PASSWORD_FIELD).sendKeys(webProperties.getWebUserPassword());
         return this;
     }
 
@@ -51,6 +50,7 @@ public class LoginPage extends BasePage {
             return "";
         }
     }
+
     public String getErrorPasswordText() {
         try {
             WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_EMPTY_PASSWORD_FIELD));

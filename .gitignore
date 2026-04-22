@@ -26,6 +26,7 @@ replay_pid*
 conf.properties
 api.properties
 db.properties
+web.properties
 
 target
 allure-results
